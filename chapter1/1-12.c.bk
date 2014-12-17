@@ -1,0 +1,30 @@
+#include <stdio.h>
+#define IN 1
+#define OUT 0
+#define BLANK ' '
+#define NOBLANK 'a'
+/* prints its input one word per line */
+main()
+{
+  int c;
+  int state, lastc;
+
+  state = OUT;
+  lastc = BLANK;
+
+  while ((c = getchar()) != EOF) {
+    if (c == ' ' || c == '\t' || c == '\n') {
+      if (lastc == NOBLANK) {
+        putchar('\n');
+        lastc = BLANK;
+      }
+      state = OUT; 
+    }
+    else if (state == OUT) {
+      state = IN;
+      putchar(c);
+      lastc = NOBLANK;
+    } else 
+      putchar(c);
+  }
+}
